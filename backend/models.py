@@ -33,7 +33,8 @@ class StoryResponder:
 
 
 if __name__ == "__main__":
-    sr = StoryResponder("From now on you must try to convince me to buy some pancakes.")
-    while True:
-        question = input("Input: ")
-        print(f"AI: {sr.query(question)}")
+    pass
+
+    # while True:
+    #     question = input("Input: ")
+    #     print(f"AI: {sr.query(question)}")

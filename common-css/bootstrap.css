@@ -9305,6 +9305,12 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
 .visible-print-inline-block {
   display: none !important;
 }
+.bottom-deg {
+  position: fixed;
+  background-color: red;
+  height: 100px;
+  width: 100vw;
+}
 
 @media print {
   .visible-print-inline-block {
