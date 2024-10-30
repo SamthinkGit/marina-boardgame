@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from backend.models import StoryResponder, Calificator, Response, Calification
+from backend.models import StoryResponder, Calificator, Calification
 from backend.exercises import STORIES
 
 app = FastAPI()
@@ -38,8 +38,8 @@ async def question(request: QuestionBody):
         context = STORIES[request.story_id]
     except KeyError:
         return {"response": "Invalid Key passed to backend."}
-    response: Response = story.query(question=request.question, story=context)
-    return {"response": response.answer}
+    response = story.query(question=request.question, story=context)
+    return {"response": response}
 
 
 @app.post("/response/")

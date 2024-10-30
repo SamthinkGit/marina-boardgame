@@ -6,14 +6,16 @@ questionForm.addEventListener('submit', function(event) {
     event.preventDefault(); // Evita el envío normal del formulario
 
     const questionInput = questionForm.querySelector('input[name="question"]').value;
+    const selectElement = document.getElementById("card-select");
+    const id = parseInt(selectElement.value, 10);
 
     if (questionInput) {
-        fetch('http://127.0.0.1:8000/generate_response/', {
+        fetch('http://127.0.0.1:8000/question/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ input: questionInput })
+            body: JSON.stringify({ question: questionInput, story_id: id})
         })
         .then(response => response.json())
         .then(data => {
@@ -32,14 +34,16 @@ solutionForm.addEventListener('submit', function(event) {
     event.preventDefault(); // Evita el envío normal del formulario
 
     const solutionInput = solutionForm.querySelector('input[name="solution"]').value;
+    const selectElement = document.getElementById("card-select");
+    const id = parseInt(selectElement.value, 10);
 
     if (solutionInput) {
-        fetch('http://127.0.0.1:8000/generate_response/', {
+        fetch('http://127.0.0.1:8000/response/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ input: solutionInput })
+            body: JSON.stringify({ proposal: solutionInput, story_id: id})
         })
         .then(response => response.json())
         .then(data => {

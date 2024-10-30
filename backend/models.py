@@ -47,7 +47,7 @@ class StoryResponder:
         )
         self.chain = prompt | llm
 
-    def query(self, question: str, story: str) -> None:
+    def query(self, question: str, story: str) -> str:
         try:
             return self.chain.invoke(
                 input={"story": story, "question": question}
@@ -85,7 +85,7 @@ class Calificator:
         )
         self.chain = prompt | llm
 
-    def query(self, proposal: str, story: str) -> None:
+    def query(self, proposal: str, story: str) -> Calification:
         try:
             response = self.chain.invoke(
                 input={"story": story, "proposal": proposal}

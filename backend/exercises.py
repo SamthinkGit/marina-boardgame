@@ -37,4 +37,9 @@ directamente. Si encuentran este hueco, entonces se puede llamar a un gato que h
 puede traer una llave a traves de ese agujero. El unico modo de saber que hay un gato como mucho podra ser 
 su sonido de llaves colgando.
 """,
+    """
+Kekio se distrajo un momento mientras veían televisión, en esos momentos, Marina
+perdió el control de la televisión, dejando a ambos dos teniendo que buscar
+donde estaba en el salón.
+""",
 ]
