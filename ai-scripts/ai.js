@@ -8,6 +8,7 @@ questionForm.addEventListener('submit', function(event) {
     const questionInput = questionForm.querySelector('input[name="question"]').value;
     const selectElement = document.getElementById("card-select");
     const id = parseInt(selectElement.value, 10);
+    responseElement.textContent = "Cargando...";
 
     if (questionInput) {
         fetch('http://127.0.0.1:8000/question/', {
@@ -36,6 +37,7 @@ solutionForm.addEventListener('submit', function(event) {
     const solutionInput = solutionForm.querySelector('input[name="solution"]').value;
     const selectElement = document.getElementById("card-select");
     const id = parseInt(selectElement.value, 10);
+    responseElement.textContent = "Cargando...";
 
     if (solutionInput) {
         fetch('http://127.0.0.1:8000/response/', {
