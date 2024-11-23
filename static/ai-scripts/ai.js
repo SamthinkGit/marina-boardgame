@@ -57,7 +57,7 @@ solutionForm.addEventListener('submit', function(event) {
     responseElement.textContent = "Cargando...";
 
     if (solutionInput) {
-        fetch(`${BASE_URL}/question/`, {
+        fetch(`${BASE_URL}/response/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
