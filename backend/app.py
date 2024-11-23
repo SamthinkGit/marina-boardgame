@@ -1,5 +1,6 @@
 import nest_asyncio
 from pyngrok import ngrok
+from colorama import Fore, Style
 import uvicorn
 
 from fastapi.staticfiles import StaticFiles
@@ -61,6 +62,9 @@ async def response(request: ProposalBody):
 
 
 ngrok_tunnel = ngrok.connect(8000)
-print("Public URL:", ngrok_tunnel.public_url)
+print(f"{Fore.CYAN}{Style.BRIGHT}{['='*100]}")
+print(f"{Fore.GREEN}{Style.BRIGHT}🔥 -> Public URL: {ngrok_tunnel.public_url}")
+print(f"{Fore.CYAN}{Style.BRIGHT}{['='*100]}")
+
 nest_asyncio.apply()
 uvicorn.run(app, port=8000)
