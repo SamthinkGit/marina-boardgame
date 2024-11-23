@@ -21,11 +21,6 @@ class Calification(BaseModel):
     )
 
 
-os.environ["OPENAI_API_KEY"] = (
-    "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"  # noqa
-)
-
-
 class StoryResponder:
 
     def __init__(self) -> None:

@@ -3,16 +3,18 @@ from pyngrok import ngrok
 from colorama import Fore, Style
 import uvicorn
 
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from backend.models import StoryResponder, Calificator, Calification
 from backend.exercises import STORIES
+import os
 
 app = FastAPI()
 
-app.mount("/", StaticFiles(directory="static", html=True), name="static")
+app.mount("/static", StaticFiles(directory="static", html=True), name="static")
 
 # Configura CORS
 app.add_middleware(
@@ -39,9 +41,26 @@ class ProposalBody(BaseModel):
 story = StoryResponder()
 calificator = Calificator()
 
+STATIC_DIR = "static"
+
+
+@app.get("/{file_path:path}")
+async def serve_static(file_path: str):
+    file_full_path = os.path.join(STATIC_DIR, file_path)
+
+    if file_path == "" or file_path == "/":
+        file_full_path = os.path.join(STATIC_DIR, "index.html")
+
+    # Verificar si el archivo existe en la carpeta static
+    if not os.path.isfile(file_full_path):
+        raise HTTPException(status_code=404, detail="File not found")
+
+    return FileResponse(file_full_path)
+
 
 @app.post("/question/")
 async def question(request: QuestionBody):
+    print(request.question)
     try:
         context = STORIES[request.story_id]
     except KeyError:
