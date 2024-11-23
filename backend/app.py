@@ -1,3 +1,7 @@
+import nest_asyncio
+from pyngrok import ngrok
+import uvicorn
+
 from fastapi.staticfiles import StaticFiles
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -54,3 +58,9 @@ async def response(request: ProposalBody):
 
     response: Calification = calificator.query(proposal=request.proposal, story=context)
     return {"response": f"{response.calification}: {response.question}"}
+
+
+ngrok_tunnel = ngrok.connect(8000)
+print("Public URL:", ngrok_tunnel.public_url)
+nest_asyncio.apply()
+uvicorn.run(app, port=8000)
