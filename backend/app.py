@@ -1,3 +1,4 @@
+import json
 import nest_asyncio
 from pyngrok import ngrok
 from colorama import Fore, Style
@@ -84,6 +85,19 @@ ngrok_tunnel = ngrok.connect(8000)
 print(f"{Fore.CYAN}{Style.BRIGHT}{['='*100]}")
 print(f"{Fore.GREEN}{Style.BRIGHT}🔥 -> Public URL: {ngrok_tunnel.public_url}")
 print(f"{Fore.CYAN}{Style.BRIGHT}{['='*100]}")
+
+config_path = "static/config.json"
+
+try:
+    with open(config_path, "r") as f:
+        config = json.load(f)
+except FileNotFoundError:
+    config = {}
+
+config["baseUrl"] = ngrok_tunnel.public_url
+
+with open(config_path, "w") as f:
+    json.dump(config, f, indent=4)
 
 nest_asyncio.apply()
 uvicorn.run(app, port=8000)

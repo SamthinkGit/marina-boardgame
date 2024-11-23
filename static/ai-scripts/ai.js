@@ -1,3 +1,20 @@
+let BASE_URL = '';
+
+fetch('/static/config.json')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Error al cargar config.json: ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(config => {
+        BASE_URL = config.baseUrl;
+        setupEventListeners();
+    })
+    .catch(error => {
+        console.error('Error cargando config.json:', error);
+    });
+
 const questionForm = document.querySelector('form [name="question"]').closest('form');
 const solutionForm = document.querySelector('form [name="solution"]').closest('form');
 const responseElement = document.querySelector('.post-desc');
@@ -11,7 +28,7 @@ questionForm.addEventListener('submit', function(event) {
     responseElement.textContent = "Cargando...";
 
     if (questionInput) {
-        fetch('http://127.0.0.1:8000/question/', {
+        fetch(`${BASE_URL}/question/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -40,7 +57,7 @@ solutionForm.addEventListener('submit', function(event) {
     responseElement.textContent = "Cargando...";
 
     if (solutionInput) {
-        fetch('http://127.0.0.1:8000/response/', {
+        fetch(`${BASE_URL}/question/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
