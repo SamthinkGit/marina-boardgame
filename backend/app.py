@@ -1,3 +1,4 @@
+from fastapi.staticfiles import StaticFiles
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -5,6 +6,8 @@ from backend.models import StoryResponder, Calificator, Calification
 from backend.exercises import STORIES
 
 app = FastAPI()
+
+app.mount("/", StaticFiles(directory="static", html=True), name="static")
 
 # Configura CORS
 app.add_middleware(
