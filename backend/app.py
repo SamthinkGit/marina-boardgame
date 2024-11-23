@@ -78,7 +78,7 @@ async def response(request: ProposalBody):
         return {"response": "Invalid Key passed to backend."}
 
     response: Calification = calificator.query(proposal=request.proposal, story=context)
-    return {"response": f"{response.calification}: {response.question}"}
+    return {"response": f"{response.calification}%: {response.question}"}
 
 
 ngrok_tunnel = ngrok.connect(8000)
